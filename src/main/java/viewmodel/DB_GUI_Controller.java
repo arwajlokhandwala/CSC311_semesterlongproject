@@ -36,6 +36,8 @@ public class DB_GUI_Controller implements Initializable {
     @FXML
     MenuBar menuBar;
     @FXML
+    Button edit_button, delete_button;
+    @FXML
     private TableView<Person> tv;
     @FXML
     private TableColumn<Person, Integer> tv_id;
@@ -54,6 +56,8 @@ public class DB_GUI_Controller implements Initializable {
             tv_major.setCellValueFactory(new PropertyValueFactory<>("major"));
             tv_email.setCellValueFactory(new PropertyValueFactory<>("email"));
             tv.setItems(data);
+            edit_button.setDisable(true);
+            delete_button.setDisable(true);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -64,6 +68,7 @@ public class DB_GUI_Controller implements Initializable {
 
             Person p = new Person(first_name.getText(), last_name.getText(), department.getText(),
                     major.getText(), email.getText(), imageURL.getText());
+
             cnUtil.insertUser(p);
             cnUtil.retrieveId(p);
             p.setId(cnUtil.retrieveId(p));
@@ -80,6 +85,8 @@ public class DB_GUI_Controller implements Initializable {
         major.setText("");
         email.setText("");
         imageURL.setText("");
+        edit_button.setDisable(true);
+        delete_button.setDisable(true);
     }
 
     @FXML
@@ -151,6 +158,12 @@ public class DB_GUI_Controller implements Initializable {
     @FXML
     protected void selectedItemTV(MouseEvent mouseEvent) {
         Person p = tv.getSelectionModel().getSelectedItem();
+            if (p == null){
+                return;
+            }
+
+        edit_button.setDisable(false);
+        delete_button.setDisable(false);
         first_name.setText(p.getFirstName());
         last_name.setText(p.getLastName());
         department.setText(p.getDepartment());
@@ -213,6 +226,7 @@ public class DB_GUI_Controller implements Initializable {
                     results.fname + " " + results.lname + " " + results.major);
         });
     }
+
 
     private static enum Major {Business, CSC, CPIS}
 
