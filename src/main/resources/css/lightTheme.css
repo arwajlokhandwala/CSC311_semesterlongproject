@@ -70,13 +70,13 @@
 
 }
 .table-row-cell:selected {
-   -fx-background-color: whitesmoke;
-   -fx-text-background-color:  #33FF55;
-
-.table-row-cell:filled .cell{
+    -fx-background-color: whitesmoke;
+    -fx-text-background-color: #33FF55;
+}
+.table-row-cell:filled .cell {
     -fx-border-width: 0.3;
 }
-}
+
 .table-view:focused .table-row-cell:selected .table-cell {
     -fx-background-color: lightBlue;
     -fx-text-fill: grey;
