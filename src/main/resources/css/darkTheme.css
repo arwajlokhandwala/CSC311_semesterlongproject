@@ -1,9 +1,9 @@
 .anchor_pane {
-    -fx-background-color: black;
+    -fx-background-color: #320116;
 }
 
 .db_btn {
-    -fx-background-color: #555;
+    -fx-background-color: #c11944;
     -fx-radius: 2;
     -fx-cursor: hand;
     -fx-font-family: "Arial";
@@ -18,7 +18,7 @@
 }
 
 .left_pane {
-    -fx-background-color: #313131;
+    -fx-background-color: #620520;
     -fx-pref-width: 130px;
     -fx-pref-height: 600px;
         -fx-text-fill: white;
@@ -29,35 +29,35 @@
 }
 
 .table_columns {
-    -fx-background-color: #171616;
+    -fx-background-color: #390143;
     -fx-text-fill: #e7e1e1;
 }
 
 
 .menu_bar{
-    -fx-background-color: black;
+    -fx-background-color: #480441;
 }
 
 .menu_bar .label{
-    -fx-background-color: black;
+    -fx-background-color: #480441;
     -fx-font-size: 15 pt;
         -fx-text-fill: white;
 }
 
 .menu_options .label{
-    -fx-background-color: black;
+    -fx-background-color: #480441;
         -fx-text-fill: white;
 
 }
 .menu_items{
-    -fx-background-color: black;
+    -fx-background-color: #480441;
 }
 .text_field_pane {
-    -fx-background-color: #424242;
+    -fx-background-color: #5e0a40;
 }
 
 .text_field {
-    -fx-background-color: black;
+    -fx-background-color: #320116;
     -fx-text-fill: white;
 }
 
@@ -70,12 +70,12 @@
     -fx-stroke: white;
 }
 .table-view:focused .table-row-cell:selected .table-cell {
-    -fx-background-color: lightBlue;
+    -fx-background-color: #9e1a41;
     -fx-text-fill: grey;
 }
 .table-view .column-header,
 .table-view .column-header-background .filler {
-    -fx-background-color:  #6622CC;
+    -fx-background-color:  #7d0a29;
 }
 .table-view .column-header .label{
    -fx-text-fill: white;
@@ -85,7 +85,7 @@
 .table-view .cell{
    -fx-cell-size: 35;
   -fx-alignment: center-left;
-  -fx-background-color: #444;
+  -fx-background-color: #941436;
   -fx-border-color: #29292D;
   -fx-text-fill: lightgray;
   -fx-alignment: CENTER_LEFT;
@@ -109,7 +109,7 @@
 .table-view .scroll-bar:horizontal .track,
 .table-view .scroll-bar:vertical .track{
 	-fx-background-color: transparent;
-	-fx-border-color:derive( #6622CC,80%);
+	-fx-border-color:derive( #7d0a29,80%);
 
 	-fx-background-radius: 2em;
 	-fx-border-radius:2em;
@@ -118,7 +118,7 @@
 /* The main scrollbar **thumb** CSS class which we drag every time (movable) */
 .table-view .scroll-bar:horizontal .thumb,
 .table-view .scroll-bar:vertical .thumb {
-    -fx-background-color:derive( #6622CC,90%);
+    -fx-background-color:derive( #7d0a29,90%);
 	-fx-background-insets: 2, 0, 0;
 	-fx-background-radius: 2em;
 
