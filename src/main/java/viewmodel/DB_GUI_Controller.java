@@ -32,6 +32,7 @@ import java.nio.file.Files;
 import java.time.LocalDate;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.regex.Pattern;
 
 public class DB_GUI_Controller implements Initializable {
 
@@ -41,7 +42,9 @@ public class DB_GUI_Controller implements Initializable {
     @FXML
     ProgressBar progressBar;
     @FXML
-    TextField first_name, last_name, department, major, email, imageURL;
+    TextField first_name, last_name, department, email, imageURL;
+    @FXML
+    ComboBox<Major> majorComboBox;
     @FXML
     ImageView img_view;
     @FXML
@@ -57,6 +60,8 @@ public class DB_GUI_Controller implements Initializable {
     private final DbConnectivityClass cnUtil = new DbConnectivityClass();
     private final ObservableList<Person> data = cnUtil.getData();
 
+    private static final Pattern NAME_PATTERN = Pattern.compile("^[A-Za-z\\s]+$");
+    private static final Pattern EMAIL_PATTERN = Pattern.compile("^[\\w-.]+@[\\w-]+\\.[a-z]{2,4}$");
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
@@ -69,6 +74,10 @@ public class DB_GUI_Controller implements Initializable {
             tv.setItems(data);
             edit_button.setDisable(true);
             delete_button.setDisable(true);
+
+            majorComboBox.setItems(FXCollections.observableArrayList(Major.values()));
+            majorComboBox.getSelectionModel().selectFirst(); // Select the first option by default
+
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -78,7 +87,7 @@ public class DB_GUI_Controller implements Initializable {
     protected void addNewRecord() {
 
             Person p = new Person(first_name.getText(), last_name.getText(), department.getText(),
-                    major.getText(), email.getText(), imageURL.getText());
+                    majorComboBox.getValue().toString(), email.getText(), imageURL.getText());
 
             cnUtil.insertUser(p);
             cnUtil.retrieveId(p);
@@ -88,12 +97,13 @@ public class DB_GUI_Controller implements Initializable {
 
     }
 
+
     @FXML
     protected void clearForm() {
         first_name.setText("");
         last_name.setText("");
         department.setText("");
-        major.setText("");
+        majorComboBox.setPromptText("Choose Major");
         email.setText("");
         imageURL.setText("");
         edit_button.setDisable(true);
@@ -137,7 +147,7 @@ public class DB_GUI_Controller implements Initializable {
         Person p = tv.getSelectionModel().getSelectedItem();
         int index = data.indexOf(p);
         Person p2 = new Person(index + 1, first_name.getText(), last_name.getText(), department.getText(),
-                major.getText(), email.getText(),  imageURL.getText());
+                majorComboBox.getValue().toString(), email.getText(),  imageURL.getText());
         cnUtil.editUser(p.getId(), p2);
         data.remove(p);
         data.add(index, p2);
@@ -183,7 +193,7 @@ public class DB_GUI_Controller implements Initializable {
         first_name.setText(p.getFirstName());
         last_name.setText(p.getLastName());
         department.setText(p.getDepartment());
-        major.setText(p.getMajor());
+        majorComboBox.setValue(Major.valueOf(p.getMajor()));
         email.setText(p.getEmail());
         imageURL.setText(p.getImageURL());
     }
