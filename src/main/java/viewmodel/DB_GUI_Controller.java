@@ -156,6 +156,8 @@ public class DB_GUI_Controller implements Initializable {
         data.remove(p);
         data.add(index, p2);
         tv.getSelectionModel().select(index);
+        statusLabel.setText("Record edited.");
+
     }
 
     @FXML
@@ -165,6 +167,8 @@ public class DB_GUI_Controller implements Initializable {
         cnUtil.deleteRecord(p);
         data.remove(index);
         tv.getSelectionModel().select(index);
+        statusLabel.setText("Record deleted.");
+
     }
 
     @FXML
