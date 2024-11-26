@@ -26,6 +26,7 @@ import service.MyLogger;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileWriter;
 import java.io.OutputStream;
 import java.net.URL;
 import java.nio.file.Files;
@@ -51,6 +52,10 @@ public class DB_GUI_Controller implements Initializable {
     ImageView img_view;
     @FXML
     MenuBar menuBar;
+    @FXML
+    MenuItem importCSV;
+    @FXML
+    MenuItem exportCSV;
     @FXML
     Button edit_button, delete_button;
     @FXML
@@ -79,6 +84,7 @@ public class DB_GUI_Controller implements Initializable {
 
             majorComboBox.setItems(FXCollections.observableArrayList(Major.values()));
             majorComboBox.getSelectionModel().selectFirst(); // Select the first option by default
+
 
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -229,6 +235,38 @@ public class DB_GUI_Controller implements Initializable {
             scene.getStylesheets().add(getClass().getResource("/css/darkTheme.css").toExternalForm());
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    @FXML
+    protected void exportCSV(ActionEvent actionEvent) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV Files", "*.csv"));
+        File file = fileChooser.showSaveDialog(menuBar.getScene().getWindow());
+
+        if (file != null) {
+            try (FileWriter writer = new FileWriter(file)) {
+                // Write the header
+                writer.append("ID,First Name,Last Name,Department,Major,Email");
+
+
+                // Write the data
+                for (Person person : data) {
+                    writer.write(String.format("%d,%s,%s,%s,%s,%s",
+                            person.getId(),
+                            person.getFirstName(),
+                            person.getLastName(),
+                            person.getDepartment(),
+                            person.getMajor(),
+                            person.getEmail(),
+                            person.getImageURL()));
+                }
+
+                statusLabel.setText("Data exported successfully to " + file.getAbsolutePath());
+            } catch (Exception e) {
+                e.printStackTrace();
+                statusLabel.setText("Error exporting data: " + e.getMessage());
+            }
         }
     }
 

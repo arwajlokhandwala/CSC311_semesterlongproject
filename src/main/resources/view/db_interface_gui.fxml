@@ -41,6 +41,12 @@
                         <MenuItem fx:id="CopyItem" mnemonicParsing="false" styleClass="menu_items" text="_Copy       Ctrl+C" />
                      </items>
                   </Menu>
+                  <Menu mnemonicParsing="false" text="CSV">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Export CSV" />
+                      <MenuItem mnemonicParsing="false" text="Import CSV" />
+                    </items>
+                  </Menu>
                         <Menu mnemonicParsing="false" styleClass="menu_options" text="Theme">
                             <items>
                                 <MenuItem mnemonicParsing="false" onAction="#lightTheme" styleClass="menu_items" text="LIGHT THEME" />
