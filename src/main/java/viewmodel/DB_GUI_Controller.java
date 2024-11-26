@@ -42,6 +42,8 @@ public class DB_GUI_Controller implements Initializable {
     @FXML
     ProgressBar progressBar;
     @FXML
+    Label statusLabel;
+    @FXML
     TextField first_name, last_name, department, email, imageURL;
     @FXML
     ComboBox<Major> majorComboBox;
@@ -94,6 +96,8 @@ public class DB_GUI_Controller implements Initializable {
             p.setId(cnUtil.retrieveId(p));
             data.add(p);
             clearForm();
+
+            statusLabel.setText("Record created successfully!");
 
     }
 
