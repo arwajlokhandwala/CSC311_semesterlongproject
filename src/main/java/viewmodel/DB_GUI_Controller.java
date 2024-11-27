@@ -238,8 +238,11 @@ public class DB_GUI_Controller implements Initializable {
         }
     }
 
+
+
+
     @FXML
-    protected void exportCSV(ActionEvent actionEvent) {
+    public void exportCSV(ActionEvent actionEvent) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV Files", "*.csv"));
         File file = fileChooser.showSaveDialog(menuBar.getScene().getWindow());
@@ -269,6 +272,42 @@ public class DB_GUI_Controller implements Initializable {
             }
         }
     }
+
+    @FXML
+    public void importCSV(ActionEvent actionEvent) {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV Files", "*.csv"));
+        File file = fileChooser.showOpenDialog(menuBar.getScene().getWindow());
+
+        if (file != null) {
+            try (var reader = Files.newBufferedReader(file.toPath())) {
+                String line;
+                data.clear();
+                reader.readLine();
+                while ((line = reader.readLine()) != null) {
+                    String[] values = line.split(",");
+                    if (values.length == 6) {
+                        int id = Integer.parseInt(values[0]);
+                        String firstName = values[1];
+                        String lastName = values[2];
+                        String department = values[3];
+                        String major = values[4];
+                        String email = values[5];
+                        String imageURL = "";
+
+                        Person person = new Person(id, firstName, lastName, department, major, email, imageURL);
+                        data.add(person);
+                    }
+                }
+                tv.setItems(data);
+                statusLabel.setText("Data imported successfully from " + file.getAbsolutePath());
+            } catch (Exception e) {
+                e.printStackTrace();
+                statusLabel.setText("Error importing data: " + e.getMessage());
+            }
+        }
+    }
+
 
     public void showSomeone() {
         Dialog<Results> dialog = new Dialog<>();
