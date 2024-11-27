@@ -1,7 +1,5 @@
 package service;
 
-import java.util.HashSet;
-import java.util.Set;
 import java.util.prefs.Preferences;
 
 public class UserSession {
@@ -26,7 +24,7 @@ public class UserSession {
     }
 
 
-    public static UserSession getInstace(String userName, String password, String privileges) {
+    public static UserSession getInstance(String userName, String password, String privileges) {
         synchronized (lock) {
             if (instance == null) {
                 instance = new UserSession(userName, password, privileges);
@@ -35,7 +33,7 @@ public class UserSession {
         }
     }
 
-    public static UserSession getInstace(String userName, String password) {
+    public static UserSession getInstance(String userName, String password) {
         synchronized (lock) {
             if (instance == null) {
                 instance = new UserSession(userName, password, "NONE");
