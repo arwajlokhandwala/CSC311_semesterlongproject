@@ -13,54 +13,70 @@ public class UserSession {
     private String password;
     private String privileges;
 
+    private static final Object lock = new Object();
+
     private UserSession(String userName, String password, String privileges) {
         this.userName = userName;
         this.password = password;
         this.privileges = privileges;
         Preferences userPreferences = Preferences.userRoot();
-        userPreferences.put("USERNAME",userName);
-        userPreferences.put("PASSWORD",password);
-        userPreferences.put("PRIVILEGES",privileges);
+        userPreferences.put("USERNAME", userName);
+        userPreferences.put("PASSWORD", password);
+        userPreferences.put("PRIVILEGES", privileges);
     }
 
 
-
-    public static UserSession getInstace(String userName,String password, String privileges) {
-        if(instance == null) {
-            instance = new UserSession(userName, password, privileges);
+    public static UserSession getInstace(String userName, String password, String privileges) {
+        synchronized (lock) {
+            if (instance == null) {
+                instance = new UserSession(userName, password, privileges);
+            }
+            return instance;
         }
-        return instance;
     }
 
-    public static UserSession getInstace(String userName,String password) {
-        if(instance == null) {
-            instance = new UserSession(userName, password, "NONE");
+    public static UserSession getInstace(String userName, String password) {
+        synchronized (lock) {
+            if (instance == null) {
+                instance = new UserSession(userName, password, "NONE");
+            }
+            return instance;
         }
-        return instance;
     }
+
     public String getUserName() {
-        return this.userName;
+        synchronized (lock) {
+            return this.userName;
+        }
     }
 
     public String getPassword() {
-        return this.password;
+        synchronized (lock) {
+            return this.password;
+        }
     }
 
     public String getPrivileges() {
-        return this.privileges;
+        synchronized (lock) {
+            return this.privileges;
+        }
     }
 
     public void cleanUserSession() {
-        this.userName = "";// or null
-        this.password = "";
-        this.privileges = "";// or null
+        synchronized (lock) {
+            this.userName = "";// or null
+            this.password = "";
+            this.privileges = "";// or null
+        }
     }
 
     @Override
     public String toString() {
-        return "UserSession{" +
-                "userName='" + this.userName + '\'' +
-                ", privileges=" + this.privileges +
-                '}';
+        synchronized (lock) {
+            return "UserSession{" +
+                    "userName='" + this.userName + '\'' +
+                    ", privileges=" + this.privileges +
+                    '}';
+        }
     }
 }

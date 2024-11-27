@@ -365,14 +365,13 @@ public class DB_GUI_Controller implements Initializable {
                 try (FileInputStream fileInputStream = new FileInputStream(file);
                      OutputStream blobOutputStream = blobClient.getBlockBlobClient().getBlobOutputStream()) {
 
-                    byte[] buffer = new byte[1024 * 1024]; // 1 MB buffer size
+                    byte[] buffer = new byte[1024 * 1024];
                     int bytesRead;
 
                     while ((bytesRead = fileInputStream.read(buffer)) != -1) {
                         blobOutputStream.write(buffer, 0, bytesRead);
                         uploadedBytes += bytesRead;
 
-                        // Calculate and update progress as a percentage
                         int progress = (int) ((double) uploadedBytes / fileSize * 100);
                         updateProgress(progress, 100);
                     }
