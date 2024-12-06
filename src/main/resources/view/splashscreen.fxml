@@ -13,7 +13,7 @@
    <children>
       <ImageView fitHeight="316.0" fitWidth="459.0" pickOnBounds="true" preserveRatio="true"  >
        <image>
-                <Image url="@../images/fscPink.png" />
+                <Image url="@../images/classConnectInverted.png" />
        </image>
       </ImageView>
    </children>

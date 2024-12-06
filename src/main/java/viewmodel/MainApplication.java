@@ -23,11 +23,11 @@ public class MainApplication extends Application {
     }
 
     public void start(Stage primaryStage) {
-        Image icon = new Image(getClass().getResourceAsStream("/images/fsclogo.png"));
+        Image icon = new Image(getClass().getResourceAsStream("/images/classConnectInverted.png"));
         this.primaryStage = primaryStage;
         this.primaryStage.setResizable(false);
         primaryStage.getIcons().add(icon);
-        primaryStage.setTitle("FSC Student Registry");
+        primaryStage.setTitle("Classroom Connect");
         showScene1();
     }
 
