@@ -34,12 +34,11 @@ public class SignUpController {
     private TextField confirmPasswordField;
 
     @FXML
-    private Button signUpBtn;
+    private Button newAccountBtn;
 
     @FXML
     private Button goBackBtn;
 
-    private final String userREGEX = "^[a-zA-Z0-9_-]+$";
     private final String passwordREGEX = "^[a-zA-Z0-9_-]+$";
     private final String emailREGEX = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
 
@@ -54,20 +53,35 @@ public class SignUpController {
         String confirmPassword = confirmPasswordField.getText();
 
         if (firstName.isEmpty() || lastName.isEmpty() || email.isEmpty() || password.isEmpty()) {
+          // newAccountBtn.isDisabled();
+            alert.setTitle("Error");
             alert.setContentText("Please fill all the fields");
+            alert.showAndWait();
+            return;
+        }
+
+        if(!email.matches(emailREGEX)) {
+          //  newAccountBtn.isDisabled();
+            alert.setTitle("Error");
+            alert.setContentText("Please enter a valid email address");
+            alert.showAndWait();
             return;
         }
 
         if (!password.equals(confirmPassword)) {
-           alert.setContentText("Passwords do not match.");
+           // newAccountBtn.isDisabled();
+            alert.setTitle("Error");
+            alert.setContentText("Passwords do not match.");
+            alert.showAndWait();
            return;
         }
+
 
 
         try {
 
             Preferences userPreferences = Preferences.userRoot().node(this.getClass().getName());
-            userPreferences.put("USERNAME", email);
+            userPreferences.put("EMAIL", email);
             userPreferences.put("PASSWORD", password);
 
 
