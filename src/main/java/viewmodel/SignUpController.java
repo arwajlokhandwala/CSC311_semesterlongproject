@@ -39,6 +39,10 @@ public class SignUpController {
     @FXML
     private Button goBackBtn;
 
+    private final String userREGEX = "^[a-zA-Z0-9_-]+$";
+    private final String passwordREGEX = "^[a-zA-Z0-9_-]+$";
+    private final String emailREGEX = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
+
 
     public void createNewAccount(ActionEvent actionEvent) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
