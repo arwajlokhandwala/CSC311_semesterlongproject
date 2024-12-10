@@ -100,9 +100,7 @@
     -fx-background-radius: 2em;
 }
 
-/* New styles for additional FXML components */
 
-/* Style for Text Fields */
 .text-field {
     -fx-background-color: #ffffff;
     -fx-border-color: #db0652;
@@ -111,14 +109,14 @@
     -fx-font-size: 14px;
 }
 
-/* Style for Labels */
+
 .label {
     -fx-text-fill: #000000;
     -fx-font-family: "Arial";
     -fx-font-size: 14px;
 }
 
-/* Style for ComboBox */
+
 .combo-box {
     -fx-background-color: #ffffff;
     -fx-border-color: #db0652;
@@ -126,21 +124,21 @@
     -fx-padding: 5;
 }
 
-/* Style for CheckBox */
+
 .check-box {
     -fx-text-fill: #000000;
     -fx-font-family: "Arial";
     -fx-font-size: 14px;
 }
 
-/* Style for RadioButton */
+
 .radio-button {
     -fx-text-fill: #000000;
     -fx-font-family: "Arial";
     -fx-font-size: 14px;
 }
 
-/* Style for ScrollPane */
+
 .scroll-pane {
     -fx-background-color: #ffffff;
 }
